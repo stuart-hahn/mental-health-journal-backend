@@ -7,6 +7,7 @@ const journalRoutes = require("./routes/journals.js");
 const PORT = process.env.PORT || 3030;
 
 // middleware
+app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
