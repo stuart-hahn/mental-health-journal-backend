@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 require("dotenv").config();
 
@@ -13,8 +14,18 @@ app.use((req, res, next) => {
   next();
 });
 
+// routes
 app.use("/api/journals", journalRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Server running on ${PORT}, you better go catch it!`);
-});
+// connect to MongoDB
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(PORT, () => {
+      console.log(`Server running on ${PORT}, you better go catch it!`);
+    });
+  })
+  .catch((error) => {
+    console.error("MongoDB Connection Error!", error);
+  });

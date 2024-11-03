@@ -12,7 +12,8 @@
   "license": "ISC",
   "description": "Backend for a mental health journal app",
   "dependencies": {
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",

@@ -6,6 +6,14 @@ meta {
 
 post {
   url: {{baseUrl}}/api/journals
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "title": "Intentionally Slow",
+    "content": "It's a good idea to slow down and focus on quality. Work at a natural pace instead of pushing yourself as hard as possible.",
+    "mood": "Calm"
+  }
 }

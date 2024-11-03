@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const Journal = require("../models/Journal.js");
 
 // GET all journals
 router.get("/", (req, res) => {
@@ -12,9 +13,14 @@ router.get("/:id", (req, res) => {
 });
 
 // POST create new journal
-router.post("/", (req, res) => {
-  console.log(req.body);
-  res.json({ journal: "A new journal" });
+router.post("/", async (req, res) => {
+  const { title, content, mood } = req.body;
+  try {
+    const journal = await Journal.create({ title, content, mood });
+    res.status(200).json(journal);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 // DELETE journal
