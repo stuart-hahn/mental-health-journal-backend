@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const Journal = require("../models/Journal.js");
+const {
+  getJournals,
+  createJournal,
+} = require("../controllers/journalController.js");
 
 // GET all journals
-router.get("/", (req, res) => {
-  res.json({ journals: "A bunch of journal entries" });
-});
+router.get("/", getJournals);
 
 // GET single journal
 router.get("/:id", (req, res) => {
@@ -13,15 +14,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST create new journal
-router.post("/", async (req, res) => {
-  const { title, content, mood } = req.body;
-  try {
-    const journal = await Journal.create({ title, content, mood });
-    res.status(200).json(journal);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
+router.post("/", createJournal);
 
 // DELETE journal
 router.delete("/:id", (req, res) => {
